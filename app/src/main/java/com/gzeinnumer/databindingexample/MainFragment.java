@@ -39,6 +39,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_main);
+        binding.setViewModel(new MyViewModel());
         return binding.getRoot();
     }
 

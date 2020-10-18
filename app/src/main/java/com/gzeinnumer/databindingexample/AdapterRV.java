@@ -40,6 +40,7 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> {
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemAdapterRvBinding binding = ItemAdapterRvBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding.setViewModel(new MyViewModel4());
         return new MyHolder(binding);
     }
 

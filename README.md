@@ -40,6 +40,9 @@ dependencies {
 import androidx.lifecycle.ViewModel;
 
 public class MyViewModel extends ViewModel {
+
+    public MutableLiveData<String> str = new MutableLiveData<>();
+    
     public MyViewModel() {
     }
 }
@@ -66,7 +69,7 @@ public class MyViewModel extends ViewModel {
         android:layout_height="match_parent">
     
         <TextView
-            android:text="Hallo Zein"
+            android:text="@{viewModel.str}"
             android:id="@+id/my_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements AdapterRVMultiTyp
         android:layout_height="match_parent">
     
         <TextView
-            android:text="Hallo Zein"
+            android:text="@{viewModel.str}"
             android:id="@+id/my_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -141,6 +144,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_main);
+        binding.setViewModel(new MyViewModel());
         return binding.getRoot();
     }
 
@@ -174,7 +178,7 @@ public class MainFragment extends Fragment {
         android:layout_height="match_parent">
     
         <TextView
-            android:text="Hallo Zein"
+            android:text="@{viewModel.str}"
             android:id="@+id/my_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -193,7 +197,9 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> {
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyHolder(ItemListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        ItemListBinding binding = ItemListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)
+        binding.setViewModel(new MyViewModel());
+        return new MyHolder(binding);
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -233,7 +239,7 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> {
         android:layout_height="match_parent">
     
         <TextView
-            android:text="Hallo Zein"
+            android:text="@{viewModel.str}"
             android:id="@+id/my_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -253,7 +259,9 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> {
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (holder.getItemViewType() == TYPE_NORMAL) {
-            return new MyHolder(ItemListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+            ItemListBinding binding = ItemListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)
+            binding.setViewModel(new MyViewModel());
+            return new MyHolder(binding);
         } else {
             throw new IllegalStateException("Unexpected value: " + holder.getItemViewType());
         }
@@ -308,7 +316,7 @@ public class AdapterRV extends RecyclerView.Adapter<AdapterRV.MyHolder> {
         android:layout_height="match_parent">
     
         <TextView
-            android:text="Hallo Zein"
+            android:text="@{viewModel.str}"
             android:id="@+id/my_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -326,6 +334,8 @@ public class MainDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_main_dialog);
+        binding.setViewModel(new MyViewModel());
+        
         return binding.getRoot();
     }
 

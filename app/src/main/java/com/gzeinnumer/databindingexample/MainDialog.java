@@ -60,6 +60,7 @@ public class MainDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_main_dialog);
+        binding.setViewModel(new MyViewModel3());
         return binding.getRoot();
     }
 

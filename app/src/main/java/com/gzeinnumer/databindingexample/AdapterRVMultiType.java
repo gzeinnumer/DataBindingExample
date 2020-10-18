@@ -40,6 +40,7 @@ public class AdapterRVMultiType extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_NORMAL){
             ItemAdapterRvBinding binding = ItemAdapterRvBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            binding.setViewModel(new MyViewModel4());
             return new AdapterRV.MyHolder(binding);
         } else {
             return null;
